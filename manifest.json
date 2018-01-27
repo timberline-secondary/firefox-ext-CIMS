@@ -1,0 +1,30 @@
+{
+
+  "manifest_version": 2,
+  "name": "CIMS",
+  "version": "1.0",
+
+  "description": "Does some stuff with SD72 CIMS",
+  "homepage_url": "https://github.com/timberline-secondary/firefox-ext-CIMS",
+  "icons": {
+    "48": "icons/percentage.svg"
+  },
+
+  "permissions": [
+    "activeTab"
+  ],
+
+  "browser_action": {
+    "default_icon": "icons/percentage.svg",
+    "default_title": "CIMS",
+    "default_popup": "popup/import_data.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://cimsconnect.sd72.bc.ca/SchoolConnect/TCCourseGrades.aspx"],
+      "js": ["jquery-3.3.1.min.js","importmarks.js"]
+    }
+  ]
+
+}
