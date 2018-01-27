@@ -4,11 +4,7 @@
 
 /**
  * Convenience function to help find matching names
- * @param char
  */
-String.prototype.a = function () {
-    return this.trim().toUpperCase();
-};
 String.prototype.b = function () {
     let re = /[^A-Za-z\\s]+/g; // all non letters
     return this.replace(re, "").toUpperCase();
@@ -27,9 +23,7 @@ String.prototype.b = function () {
 
 
     /**
-     * Given a URL to a beast image, remove all existing beasts, then
-     * create and style an IMG node pointing to
-     * that image, then insert the node into the document.
+     * Paste JSON data into the prompt and it will enter the marks into CIMS
      */
     function importMarks() {
         let jsonMarkData = prompt("Paste JSON Mark Data");

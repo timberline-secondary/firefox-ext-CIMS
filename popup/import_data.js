@@ -8,29 +8,11 @@
 function listenForClicks() {
     document.addEventListener("click", (e) => {
 
-
-        /**
-         * Insert the page-hiding CSS into the active tab,
-         * then get the beast URL and
-         * send a "beastify" message to the content script in the active tab.
-         */
         function importMarks(tabs) {
             browser.tabs.sendMessage(tabs[0].id, {
                 command: "importMarks",
             });
         }
-
-        /**
-         * Remove the page-hiding CSS from the active tab,
-         * send a "reset" message to the content script in the active tab.
-         */
-        // function reset(tabs) {
-        //   browser.tabs.removeCSS({code: hidePage}).then(() => {
-        //     browser.tabs.sendMessage(tabs[0].id, {
-        //       command: "reset",
-        //     });
-        //   });
-        // }
 
         /**
          * Just log the error to the console.
@@ -41,7 +23,7 @@ function listenForClicks() {
 
         /**
          * Get the active tab,
-         * then call "beastify()" or "reset()" as appropriate.
+         * then call "importMarks()" or "reset()" as appropriate.
          */
         if (e.target.classList.contains("import")) {
             browser.tabs.query({active: true, currentWindow: true})
