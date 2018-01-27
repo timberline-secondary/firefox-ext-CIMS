@@ -28,7 +28,7 @@ String.prototype.b = function () {
     function importMarks() {
         let jsonMarkData = prompt("Paste JSON Mark Data");
         // console.log(jsonMarkData);
-        jsonMarkData = jQuery.parseJSON(jsonMarkData);
+        jsonMarkData = jQuery.parseJSON(jsonMarkData).data;
         console.log("Data length: " + jsonMarkData.length);
         // console.log(jsonMarkData);
         let $rowsNotFound = $();
