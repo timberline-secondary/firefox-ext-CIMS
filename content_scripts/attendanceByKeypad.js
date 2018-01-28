@@ -2,7 +2,15 @@
  * Created by couture on 27/01/18.
  */
 
+// // CREATE A DATA FILE at content_scripts/data.js:
+//
+// // CSV to Keyed JSON
+// // http://www.convertcsv.com/csv-to-json.htm
+// let studentData;
+// studentData = {};
+
 (function () {
+
     /**
      * Check and set a global guard variable.
      * If this content script is injected into the same page again,
@@ -14,12 +22,25 @@
     window.attendanceByKeypadhasRun = true;
 
 
-// CSV to Keyed JSON
-// http://www.convertcsv.com/csv-to-json.htm
-let studentData;
-studentData = {};
-
-
+    // Block Schedule Data. https://stackoverflow.com/a/6212411/2700631
+    let blocks = {
+        1 : {
+            'name': 'A',
+            'start':"08:55"
+        },
+        2 : {
+            'name': 'B',
+            'start':"10:35"
+        },
+        3 : {
+            'name': 'C',
+            'start':"12:25"
+        },
+        4 : {
+            'name': 'D',
+            'start':"13:50"
+        }
+    };
 
 
     let modalDlg = `<!-- Modal -->
@@ -32,7 +53,7 @@ studentData = {};
               <h4 class="modal-title" id="myModalLabel">Attendance Keypad Entry</h4>
             </div>
             <div class="modal-body">
-              <h1>Student Number</h1>
+              <h1>Enter Student Number:<span id="clock" class="pull-right">CLOCK</span></h1>
               <input id="studentNumberField" type="text" name="studentNumber" class="form-control" value="99">
               <h1 id="keypadResult"></h1>
             </div>
@@ -50,9 +71,51 @@ studentData = {};
     let $numberField = $("#studentNumberField");
     let $confirmBtn = $("#keypadEnter");
     let $results = $("#keypadResult");
+    let $title = $("#myModalLabel");
 
     let $table = $('table#FormContentPlaceHolder_FormContentPlaceHolder_ContentPlaceHolder1_AttList');
     let $rows = $table.find('tr').slice(2, -2); //first & last two rows are headers/footers, remove
+
+    let period, block;
+
+    function updateclock() {
+        let start = blocks[period].start
+
+
+        let date = new Date();
+          let ampm = date.getHours() < 12
+             ? 'AM'
+             : 'PM';
+          let hr = date.getHours() == 0
+                      ? 12
+                      : date.getHours() > 12
+                        ? date.getHours() - 12
+                        : date.getHours();
+
+          let min = date.getMinutes() < 10
+                        ? '0' + date.getMinutes()
+                        : date.getMinutes();
+
+          let sec = date.getSeconds() < 10
+                        ? '0' + date.getSeconds()
+                        : date.getSeconds();
+
+          let timeString = `${hr}:${min}:${sec} ${ampm}`;
+
+          $('#clock').html(timeString);
+    }
+
+
+    function setBlock() {
+        let $period = $('select[name*=OPERIODN]');
+        period = parseInt( $period.text() );
+        block = blocks[period].name;
+
+        $title.html(`Attendance Keypad Entry for <b>${block} Block</b>`);
+        updateclock()
+        window.setInterval(updateclock, 1000);
+    }
+
 
     function resetKeyInput() {
         $numberField.focus();
@@ -61,13 +124,14 @@ studentData = {};
         // fancy footwork seems to be required to get the cursor to appear at the end of the 99
     }
 
-
     // Bind "Enter" key to the submit button:
     $numberField.keyup(function (event) {
         if (event.keyCode == 13) {
             $confirmBtn.click();
         }
     });
+
+    let timer;
 
     // When the enter button is click (via enter key also) set absent to false on form for that student
     $confirmBtn.click(function (e) {
@@ -107,7 +171,7 @@ studentData = {};
                 return  firstnameRow === firstname && lastnameRow === lastname;
             });
 
-            if ($row.length == 0) throw {'msg': `${firstname} ${lastname}:\nWRONG BLOCK GO TO CLASS!`, 'style': 'warning' };
+            if ($row.length == 0) throw {'msg': `${firstname} ${lastname}:\nWRONG BLOCK GET OUT!`, 'style': 'warning' };
             let $absentCheckBox = $row.find('input[name*=chkA]');
             let $lateCheckBox = $row.find('input[name*=chkT]');
 
@@ -122,9 +186,10 @@ studentData = {};
             $results.html(results);
             resetKeyInput();
 
-            window.setTimeout(function(){
+            clearTimeout(timer);
+            timer = window.setTimeout(function(){
                 $results.html("");
-            }, 4000);
+            }, 5000);
 
         }
 
@@ -145,6 +210,7 @@ studentData = {};
 
         $modal.modal();
         $results.html("");
+        setBlock();
 
         $modal.on('shown.bs.modal', function () {
             resetKeyInput();
