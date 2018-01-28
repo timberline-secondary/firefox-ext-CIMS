@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="svg4190"
+   version="1.1"
+   width="512"
+   height="512"
+   viewBox="0 0 511.99999 512">
+  <metadata
+     id="metadata4196">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4194" />
+  <g
+     transform="translate(0,-72.218723)"
+     id="g4147">
+    <circle
+       r="53.219761"
+       cy="227.75256"
+       cx="159.79507"
+       id="path4223"
+       style="opacity:1;fill:#413065;fill-opacity:1;stroke:none;stroke-width:4.50500011;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       ry="50.792194"
+       rx="50.792194"
+       y="156.17847"
+       x="8.800725"
+       height="347.02081"
+       width="494.39856"
+       id="rect4200"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#413065;stroke-width:17.60144997;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <circle
+       r="55.591713"
+       cy="223.65872"
+       cx="158.15755"
+       id="path4221"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:4.50500011;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <circle
+       style="opacity:1;fill:#413065;fill-opacity:1;stroke:none;stroke-width:4.50500011;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle4255"
+       cx="354.66129"
+       cy="227.75256"
+       r="53.219761" />
+    <path
+       id="path4261"
+       d="m 32.067639,284.24739 178.490891,0 0,198.14125 -110.53335,0 0,-135.0963 -67.138775,0 z"
+       style="fill:#413065;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       id="path4263"
+       d="m 226.11508,285.88493 173.57831,0.81876 12.28147,126.90866 45.03213,0.81877 0,67.95752 -194.86622,0 58.13235,-135.0963 -94.15804,0 z"
+       style="fill:#413065;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
+</svg>

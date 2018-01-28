@@ -7,7 +7,7 @@
   "description": "Does some stuff with SD72 CIMS",
   "homepage_url": "https://github.com/timberline-secondary/firefox-ext-CIMS",
   "icons": {
-    "48": "icons/percentage.svg"
+    "48": "icons/sd72.svg"
   },
 
   "permissions": [
@@ -15,15 +15,16 @@
   ],
 
   "browser_action": {
-    "default_icon": "icons/percentage.svg",
-    "default_title": "CIMS",
-    "default_popup": "popup/import_data.html"
+    "default_icon": "icons/sd72.svg",
+    "default_title": "SD72 CIMS Additions",
+    "default_popup": "popup/sd72cims.html"
   },
 
   "content_scripts": [
     {
-      "matches": ["https://cimsconnect.sd72.bc.ca/SchoolConnect/TCCourseGrades.aspx"],
-      "js": ["jquery-3.3.1.min.js","importmarks.js"]
+      "matches": ["*://cimsconnect.sd72.bc.ca/SchoolConnect/TCStudentAttendance.aspx"],
+      "js" : ["/content_scripts/jquery-3.3.1.min.js", "/content_scripts/bootstrap/bootstrap.min.js"],
+      "css": ["content_scripts/bootstrap/bootstrap.min.css", "content_scripts/keypadEntry.css"]
     }
   ]
 
