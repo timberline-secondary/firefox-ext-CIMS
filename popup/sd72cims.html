@@ -1,42 +1,37 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="sd72cims.css"/>
-  </head>
+</head>
 
 <body>
-  <div id="popup-content">
+<div id="popup-content">
 
+
+    <button type="button" class="btn btn-default import">Import Marks</button>
+    <br>
+    <p>
     <div class="btn-group-vertical" role="group">
-      <button type="button" class="btn btn-default import">Import Marks</button>
-
-      <button type="button" title="Launch keypad entry form" class="btn btn-default attendance">Keypad Attendance</button>
-      <button type="button" title="Mark all students as absent" class="btn btn-default attendanceInit">Keypad Init</button>
-
-      <!--<div class="btn-group" role="group">-->
-        <!--<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-          <!--Attendance-->
-          <!--<span class="caret"></span>-->
-        <!--</button>-->
-        <!--<ul class="dropdown-menu">-->
-          <!--<li><a href="#" title="Launch keypad entry form" class="btn btn-default attendance">Keypad Attendance</a></li>-->
-          <!--<li><a href="#" title="Mark all students as absent" class="btn btn-default attendanceInit">Keypad Init</a></li>-->
-        <!--</ul>-->
-      <!--</div>-->
-    <!--</div>-->
-
+        <button type="button" title="Launch keypad entry form" class="btn btn-default attendance">Keypad Attendance
+        </button>
+        <button type="button" title="Mark all students as absent" class="btn btn-default attendanceInit">Keypad Init
+        </button>
     </div>
+    </p>
+    <p> Update Data: <input type="file" title="CSV: NUMBER, FIRSTNAME, LASTNAME" accept="text/plain" class="updateData">
+    </p>
     <div id="error-content" class="hidden">
-      <p>Can't CIMS this web page.</p><p>Try a different page.</p>
+        <p>Can't CIMS this web page.</p>
+        <p>Try a different page.</p>
     </div>
-  </div>
+</div>
 
-  <!--<script src="bootstrap/jquery-3.3.1.min.js"></script>-->
-  <!--<script src="bootstrap/bootstrap.min.js"></script>-->
-  <script src="sd72cims.js"></script>
+<!--<script src="bootstrap/jquery-3.3.1.min.js"></script>-->
+<!--<script src="bootstrap/bootstrap.min.js"></script>-->
+<script src="sd72cims.js"></script>
 </body>
 
 </html>
