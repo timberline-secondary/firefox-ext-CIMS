@@ -30,6 +30,32 @@ String.prototype.b = function () {
         // console.log(jsonMarkData);
         jsonMarkData = jQuery.parseJSON(jsonMarkData).data;
         console.log("Data length: " + jsonMarkData.length);
+
+        // check for required fields
+        let teststudent = jsonMarkData[0];
+        let errorMessage = "";
+        let missingField = false;
+        if( !("First Name" in teststudent) ) {
+          errorMessage += "[First Name] field not found.\n";
+          missingField = true;
+        }
+        if( !("Last Name" in teststudent) ) {
+            errorMessage += "[Last Name] field not found.\n";
+            missingField = true;
+        }
+        if( !("Mark" in teststudent) ) {
+            errorMessage += "[Mark] field not found.\n";
+            missingField = true;
+        }
+
+        if( missingField) {
+          errorMessage+="Make sure your JSON export inclueds these fields."
+          alert(errorMessage);
+          return false;
+        }
+
+
+
         // console.log(jsonMarkData);
         let $rowsNotFound = $();
 
@@ -42,33 +68,58 @@ String.prototype.b = function () {
             let $this = $(this);
             let firstname = $this.find('td:nth-child(2)').text();
             let lastname = $this.find('td:nth-child(1)').text();
-            let $term2 = $this.find('td > input[name*=IGR02]');
-            let $finrk = $this.find('td > input[name*=IGR08]');
-
+            // console.log(`Searching for: ${firstname} ${lastname}`)
+            let $termMark = $this.find('td > input[name*=IGR01]');
+            let $wkHabit = $this.find('td > input[name*=IGR02]');
+            let $finrk = $this.find('td > input[name*=IGR06]');
 
             function matchLast(student) {
-                return student['Last Name'].b() === lastname.b();
+                last1 = student['Last Name'].b();
+                last2 = lastname.b();
+                // if (last1 === last2)
+                //     console.log(`Found a match: ${last1} == ${last2} --> ${last1 === last2}`);
+
+                return last1 === last2;
             }
 
             function matchFirst(student) {
-                return student['First Name'].b() === firstname.b();
+                // console.log(" *** Matching FIRST name.");
+                first1 = student['First Name'].b();
+                // console.log(first1);
+                first2 = firstname.b();
+                // console.log(first2);
+                // console.log( `${first1} == ${first2} --> ${first1 === first2}`)
+                // if (first1 === first2)
+                //     console.log(`Found a match: ${first1} == ${first2} --> ${first1 === first2}`);
+                return first1 === first2;
             }
 
             function matchBothNames(student) {
-                return matchLast(student) && matchFirst(student);
+                let found = matchLast(student) && matchFirst(student);
+                // console.log(`Matching both names: ${found}`);
+                return found;
             }
-
 
             function removeFoundStudent(student) {
                let index = jsonMarkData.indexOf(student);
                jsonMarkData.splice(index,1);
             }
 
+            function getWorkHabit(mark) {
+                if (mark > 72.5)
+                    return "G"
+                else if (mark > 59.5)
+                    return "S"
+                else
+                    return "N"
+            }
+
             function processResults(students) {
                 if (students.length == 1) { // exact match found
                     let mark = Math.min( Math.round(parseFloat(students[0].Mark)), 100);
                     $finrk.val(mark);
-                    $term2.val(mark);
+                    $termMark.val(mark);
+                    $wkHabit.val(getWorkHabit(mark))
                     $this.css('background-color', 'lightgreen');
                     found = true;
                     removeFoundStudent(students[0]);
@@ -81,6 +132,8 @@ String.prototype.b = function () {
 
             if (firstname.length > 1) { // entry isn't blank(ish)... empty cells have a space?
                 // MATCH BOTH NAMES EXACT
+                // console.log("First check if exact name match is found");
+                matches = $.grep(jsonMarkData, matchBothNames)
                 found = processResults( $.grep(jsonMarkData, matchBothNames) );
                 if (!found) { // student may have netered a nickname, hope for unique last name
                     found = processResults( $.grep(jsonMarkData, matchLast) );
@@ -115,8 +168,3 @@ String.prototype.b = function () {
     });
 
 })();
-
-
-
-
-
